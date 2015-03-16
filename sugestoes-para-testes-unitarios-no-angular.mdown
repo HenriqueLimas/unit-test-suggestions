@@ -48,3 +48,38 @@ para manter o escopo do teste nesta função e não ter problemas com as variáv
 			beforeEach(module('app'));
 		});
 	´
+
+- Realizar a injeção do serviço ´$injector utilizando a sintaxe ´_$injector_´ em um ´beforeEach´ utilizando o método ´inject´ e realizando as injeções
+  usando o método ´get´ do serviço ´$injector´.
+	ex.
+	´
+		describe('app.MeuComponente', function() {
+			...
+
+			beforeEach(inject(function(_$injector_) {
+				$injector = _$injector_;
+
+				MeuComponente = $injector.get('app.MeuComponente');
+			}));
+		});
+	´
+
+	No caso de testes unitários de um serviço podemos definir as APIs que serão utilizadas em todos os testes neste ´beforeEach´,
+	utilizando o serviço ´$httpBackend´;
+
+	ex.
+	´
+		describe('app.MeuComponente', function() {
+			...
+
+			beforeEach(inject(function(_$injector_) {
+				$injector = _$injector_;
+
+				MeuComponente = $injector.get('app.MeuComponente');
+
+				$httpBackend = $injector.get('$httpBackend');
+
+				$httpBackend.whenGET(URL_COMPONENTES_ALL).respond(objetos);
+			}));
+		});
+	´
