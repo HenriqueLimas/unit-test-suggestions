@@ -20,7 +20,7 @@ para manter o escopo do teste nesta função e não ter problemas com as variáv
 
 	ex.
 ```js
-	...
+	// ...
 	describe('app.MeuComponente', function() {
 		var $injector,
 			$httpBackend,
@@ -32,7 +32,7 @@ para manter o escopo do teste nesta função e não ter problemas com as variáv
 
 		var URL_COMPONENTES_ALL = '/objetos';
 		var URL_COMPONENTE = URL_COMPONENTES_ALL + objetoModel.id;
-		...
+		// ...
 	});
 ```
 
@@ -51,7 +51,7 @@ para manter o escopo do teste nesta função e não ter problemas com as variáv
 	ex.
 ```js
 	describe('app.MeuComponente', function() {
-		...
+		// ...
 
 		beforeEach(inject(function(_$injector_) {
 			$injector = _$injector_;
@@ -63,10 +63,10 @@ para manter o escopo do teste nesta função e não ter problemas com as variáv
 No caso de testes unitários de um serviço podemos definir as APIs que serão utilizadas em todos os testes neste `beforeEach`,
 	utilizando o serviço `$httpBackend`;
 
-	ex.
+ex.
 ```js
 	describe('app.MeuComponente', function() {
-		...
+		// ...
 
 		beforeEach(inject(function(_$injector_) {
 			$injector = _$injector_;
