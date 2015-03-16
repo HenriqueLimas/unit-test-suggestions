@@ -1,0 +1,50 @@
+SUGESTÕES DE COMO REALIZAR OS TESTES UNITÁRIOS EM JS.
+
+- Implementar o código dentro de função anonima auto-executavel (anonymous self-invoking functions),
+para manter o escopo do teste nesta função e não ter problemas com as variáveis globais.
+
+- Iniciar os testes com um ´describe´ demostrando qual componente vai ser testado.
+	ex.
+	´
+		(function() {
+			'use strict';
+
+			describe('<nome do componente>', function() {
+				... Implementar os testes aqui
+			});
+
+		})();
+	´
+- Definir as variaveis globais dentro do escopo do describe inicial, todas as variaveis que irão ser utilizadas nos testes.
+	Principais: $injector, <Nome do componente>, <um objeto modelo para testes>.
+	Serviço: $httpBackend, URL_UTILIZADA
+
+	ex.
+	´
+		...
+		describe('app.MeuComponente', function() {
+			var $injector,
+				$httpBackend,
+				MeuComponente;
+
+			var objetoModelo {
+				id: 1
+			};
+
+			var URL_COMPONENTES_ALL = '/objetos';
+			var URL_COMPONENTE = URL_COMPONENTES_ALL + objetoModel.id;
+			...
+		});
+
+		...
+	´
+
+- Inicializar os modulos necessários para realizar os testes em um ´beforeEach´ utilizando o método ´module´.
+	ex.
+	´
+		describe('app.MeuComponente', function() {
+			// ...Declaração das variáveis
+
+			beforeEach(module('app'));
+		});
+	´
