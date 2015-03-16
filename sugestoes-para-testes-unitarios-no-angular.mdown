@@ -1,85 +1,81 @@
 SUGESTÕES DE COMO REALIZAR OS TESTES UNITÁRIOS EM JS.
+-----------------------------------------------------
 
 - Implementar o código dentro de função anonima auto-executavel (anonymous self-invoking functions),
 para manter o escopo do teste nesta função e não ter problemas com as variáveis globais.
 
 - Iniciar os testes com um ´describe´ demostrando qual componente vai ser testado.
 	ex.
-	´
-		(function() {
-			'use strict';
-
-			describe('<nome do componente>', function() {
-				... Implementar os testes aqui
-			});
-
-		})();
-	´
+```js
+(function() {
+		"use strict";
+	   	describe("<nome do componente>",  function() {
+			Implementar os testes aqui
+    	});
+ })();
+```
 - Definir as variaveis globais dentro do escopo do describe inicial, todas as variaveis que irão ser utilizadas nos testes.
-	Principais: $injector, <Nome do componente>, <um objeto modelo para testes>.
-	Serviço: $httpBackend, URL_UTILIZADA
+	Principais: `$injector`, `<Nome do componente>`, `<um objeto modelo para testes>`.
+	Serviço: `$httpBackend`, `URL_UTILIZADA`
 
 	ex.
-	´
+```js
+	...
+	describe('app.MeuComponente', function() {
+		var $injector,
+			$httpBackend,
+			MeuComponente;
+
+		var objetoModelo {
+			id: 1
+		};
+
+		var URL_COMPONENTES_ALL = '/objetos';
+		var URL_COMPONENTE = URL_COMPONENTES_ALL + objetoModel.id;
 		...
-		describe('app.MeuComponente', function() {
-			var $injector,
-				$httpBackend,
-				MeuComponente;
+	});
+```
 
-			var objetoModelo {
-				id: 1
-			};
-
-			var URL_COMPONENTES_ALL = '/objetos';
-			var URL_COMPONENTE = URL_COMPONENTES_ALL + objetoModel.id;
-			...
-		});
-
-		...
-	´
-
-- Inicializar os modulos necessários para realizar os testes em um ´beforeEach´ utilizando o método ´module´.
+- Inicializar os modulos necessários para realizar os testes em um `beforeEach` utilizando o método `module`.
 	ex.
-	´
-		describe('app.MeuComponente', function() {
-			// ...Declaração das variáveis
+```js
+	describe('app.MeuComponente', function() {
+		// ...Declaração das variáveis
 
-			beforeEach(module('app'));
-		});
-	´
+		beforeEach(module('app'));
+	});
+```
 
-- Realizar a injeção do serviço ´$injector utilizando a sintaxe ´_$injector_´ em um ´beforeEach´ utilizando o método ´inject´ e realizando as injeções
+- Realizar a injeção do serviço `$injector` utilizando a sintaxe `_$injector_` em um `beforeEach` utilizando o método `inject` e realizando as injeções
   usando o método ´get´ do serviço ´$injector´.
 	ex.
-	´
-		describe('app.MeuComponente', function() {
-			...
+```js
+	describe('app.MeuComponente', function() {
+		...
 
-			beforeEach(inject(function(_$injector_) {
-				$injector = _$injector_;
+		beforeEach(inject(function(_$injector_) {
+			$injector = _$injector_;
 
-				MeuComponente = $injector.get('app.MeuComponente');
-			}));
-		});
-	´
-
-	No caso de testes unitários de um serviço podemos definir as APIs que serão utilizadas em todos os testes neste ´beforeEach´,
-	utilizando o serviço ´$httpBackend´;
+			MeuComponente = $injector.get('app.MeuComponente');
+		}));
+	});
+```
+No caso de testes unitários de um serviço podemos definir as APIs que serão utilizadas em todos os testes neste `beforeEach`,
+	utilizando o serviço `$httpBackend`;
 
 	ex.
-	´
-		describe('app.MeuComponente', function() {
-			...
+```js
+	describe('app.MeuComponente', function() {
+		...
 
-			beforeEach(inject(function(_$injector_) {
-				$injector = _$injector_;
+		beforeEach(inject(function(_$injector_) {
+			$injector = _$injector_;
 
-				MeuComponente = $injector.get('app.MeuComponente');
+			MeuComponente = $injector.get('app.MeuComponente');
 
-				$httpBackend = $injector.get('$httpBackend');
+			$httpBackend = $injector.get('$httpBackend');
 
-				$httpBackend.whenGET(URL_COMPONENTES_ALL).respond(objetos);
-			}));
-		});
-	´
+			$httpBackend.whenGET(URL_COMPONENTES_ALL).respond(objetos);
+		}));
+	});
+```
