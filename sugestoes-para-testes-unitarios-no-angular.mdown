@@ -4,7 +4,7 @@ SUGESTÕES DE COMO REALIZAR OS TESTES UNITÁRIOS EM JS.
 - Implementar o código dentro de função anonima auto-executavel (anonymous self-invoking functions),
 para manter o escopo do teste nesta função e não ter problemas com as variáveis globais.
 
-- Iniciar os testes com um ´describe´ demostrando qual componente vai ser testado.
+- Iniciar os testes com um `describe` demostrando qual componente vai ser testado.
 	ex.
 ```js
 (function() {
@@ -47,7 +47,7 @@ para manter o escopo do teste nesta função e não ter problemas com as variáv
 ```
 
 - Realizar a injeção do serviço `$injector` utilizando a sintaxe `_$injector_` em um `beforeEach` utilizando o método `inject` e realizando as injeções
-  usando o método ´get´ do serviço ´$injector´.
+  usando o método `get` do serviço `$injector`.
 	ex.
 ```js
 	describe('app.MeuComponente', function() {
